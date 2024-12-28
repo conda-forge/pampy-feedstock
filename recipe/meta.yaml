@@ -5,26 +5,27 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pampy/pampy-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pampy/pampy-{{ version }}.tar.gz
   sha256: 82054212e4478fc22163c55321a3583eda9918aff4440eed6c197e872a2a667b
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   imports:
     - pampy
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - pip check
 
